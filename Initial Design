@@ -1,0 +1,89 @@
+import { Factory, Linkedin, Twitter, Github, Mail } from 'lucide-react';
+
+const footerLinks = [
+  {
+    title: 'Platform',
+    links: [
+      { label: 'Operating Circle', id: 'concept' },
+      { label: 'Modules', id: 'modules' },
+      { label: 'Hierarchy', id: 'hierarchy' },
+      { label: 'Dashboard Demo', id: 'dashboard' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', id: 'contact' },
+      { label: 'Contact', id: 'contact' },
+      { label: 'Request Demo', id: 'contact' },
+      { label: 'Sign In', id: 'login' },
+    ],
+  },
+];
+
+export function Footer() {
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  return (
+    <footer className="border-t border-steel-700/50 bg-slate-950">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-4">
+          {/* Brand */}
+          <div className="flex flex-col gap-4 md:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600">
+                <Factory className="h-5 w-5 text-steel-950" strokeWidth={2.5} />
+              </div>
+              <span className="font-display text-xl font-bold text-steel-50">
+                AXIS
+              </span>
+            </div>
+            <p className="max-w-sm text-sm leading-relaxed text-steel-400">
+              Maintenance operations built around one continuous loop — Compliance,
+              Planning, Procurement, Stores, and a production hierarchy that cannot
+              be skipped. Traceability is the natural outcome, not an afterthought.
+            </p>
+            <div className="flex items-center gap-3">
+              {[Linkedin, Twitter, Github, Mail].map((Icon, i) => (
+                <button
+                  key={i}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-steel-700/50 text-steel-400 transition-all hover:border-amber-500/40 hover:text-amber-400"
+                >
+                  <Icon className="h-4 w-4" />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Link columns */}
+          {footerLinks.map((col) => (
+            <div key={col.title} className="flex flex-col gap-3">
+              <h4 className="font-mono text-xs uppercase tracking-[0.15em] text-steel-500">
+                {col.title}
+              </h4>
+              {col.links.map((link) => (
+                <button
+                  key={link.label}
+                  onClick={() => scrollTo(link.id)}
+                  className="text-left text-sm text-steel-400 transition-colors hover:text-amber-400"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-steel-700/40 pt-6 sm:flex-row">
+          <p className="font-mono text-xs text-steel-500">
+            © 2026 AXIS MRO Platform. All rights reserved.
+          </p>
+          <p className="font-mono text-xs text-steel-600">
+            Built for heavy maintenance operations.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
